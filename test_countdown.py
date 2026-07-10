@@ -35,5 +35,17 @@ class TestCountdownTimer(unittest.TestCase):
         self.assertEqual(self.app.number_label.cget("text"), "ERR")
         self.assertFalse(self.app.running)
 
+    # Cycle 5 - Zero Input
+    def test_zero_input_completes_instantly(self):
+        self.app = CountdownDisplay() 
+        self.app.entry.delete(0, tk.END)
+        self.app.entry.insert(0, "0")
+        self.app.start_countdown()
+        
+        # It should immediately process the single-element sequence [0]
+        self.assertEqual(self.app.sequence, [0])
+        self.assertEqual(self.app.number_label.cget("text"), "0")
+
+
 if __name__ == "__main__":
     unittest.main()
